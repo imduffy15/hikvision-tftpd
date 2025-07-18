@@ -1,5 +1,32 @@
 Unbrick a Hikvision device. Use as follows:
 
+## Installation
+
+This project uses [uv](https://docs.astral.sh/uv/) for Python package management. Install dependencies with:
+
+    $ uv sync
+
+## Development
+
+Install development dependencies:
+
+    $ uv sync --dev
+
+Run tests:
+
+    $ uv run python -m unittest hikvision_tftpd_test.py -v
+
+Check code formatting and linting:
+
+    $ uv run ruff check .
+    $ uv run ruff format --check .
+
+Run type checking:
+
+    $ uv run mypy hikvision_tftpd.py --ignore-missing-imports
+
+## Usage
+
 Setup the expected IP address:
 
     linux$ sudo ifconfig eth0:0 192.0.0.128
@@ -11,7 +38,7 @@ Download the firmware to use:
 
 Run the script:
 
-    $ sudo ./hikvision_tftpd.py
+    $ uv run hikvision_tftpd.py
 
 Hit ctrl-C when done.
 
@@ -35,7 +62,7 @@ there are two known configurations:
 
 This program defaults to the former. The latter requires commandline overrides:
 
-    $ sudo ./hikvision_tftp.py --server-ip=172.9.18.80 --filename=digicap.mav
+    $ uv run hikvision_tftpd.py --server-ip=172.9.18.80 --filename=digicap.mav
 
 If nothing happens when your device restarts, your device may be expecting
 another IP address. tcpdump may be helpful in diagnosing this:
